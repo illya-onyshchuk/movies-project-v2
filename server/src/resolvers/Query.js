@@ -1,4 +1,9 @@
-function movies(parent, args) {
+const { getPopular } = require("../modules/movies");
+
+async function movies(parent, args) {
+  const data = await getPopular();
+  console.log(data);
+
   return {
     page: 1,
     totalResults: 12,
