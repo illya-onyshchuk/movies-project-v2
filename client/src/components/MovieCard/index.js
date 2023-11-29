@@ -1,10 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { styled } from "@mui/material/styles";
-// import Card from "@mui/material/Card";
-// import CardMedia from "@mui/material/CardMedia";
-// import CardContent from "@mui/material/CardContent";
-// import Typography from "@mui/material/Typography";
 import {
   MenuItem,
   Typography,
@@ -25,7 +21,9 @@ const MovieCard = ({ movie, onCardSelect }) => {
   return (
     <Card sx={{ maxWidth: 150, position: "relative" }}>
       <CardMenu>
-        <MenuItem onClick={onCardSelect}>Add to favorites</MenuItem>
+        <MenuItem onClick={() => onCardSelect(movie)}>
+          Add to favorites
+        </MenuItem>
       </CardMenu>
       <CardMedia
         component="img"
@@ -33,8 +31,17 @@ const MovieCard = ({ movie, onCardSelect }) => {
         image={movie.image}
         alt={movie.title}
       />
-      <CardInfo>
-        <Typography variant="h6" gutterBottom component="div">
+      <CardInfo sx={{ width: "100%", padding: 0 }}>
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="div"
+          sx={{
+            fontSize: "1rem",
+            overflowWrap: "break-word",
+            width: "100%",
+          }}
+        >
           {movie.title}
         </Typography>
 

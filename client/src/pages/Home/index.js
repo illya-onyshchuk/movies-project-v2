@@ -1,6 +1,10 @@
-import React from "react";
-import { Box, Grid, Paper, styled } from "@mui/material";
-import { MovieCard } from "../../components";
+import { useState } from "react";
+import { Box, Grid, Paper, styled, Pagination } from "@mui/material";
+import { MovieCard, MovieCardSelected } from "../../components";
+
+import { useQuery } from "@apollo/client";
+import { MOVIES_QUERY } from "./queries";
+import { useMovies } from "../../hooks/useMovies";
 
 const SelectedMovies = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -13,37 +17,71 @@ const SelectedMovies = styled(Paper)(({ theme }) => ({
 }));
 
 const Home = () => {
+  const [page, setPage] = useState(1);
+  const { loading, error, data } = useQuery(MOVIES_QUERY, {
+    variables: { page },
+  });
+  const { selectedMovies, selectetMovie, deleteMovie } = useMovies();
+
+  if (error) return "Error";
+
+  const hendlerPagination = (event, page) => {
+    setPage(page);
+  };
+
   return (
     <Box sx={{ flexGrow: 1, marginTop: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Paper>Felter section</Paper>
+          <Paper>Filter section</Paper>
         </Grid>
         <Grid item xs={12} md={8}>
           <Paper>
             <Box sx={{ flexGrow: 1, padding: 1 }}>
-              <Grid container spacing={1}>
-                <Grid item xs={16} sm={6} md={4} lg={3}>
-                  <MovieCard />
+              {loading && "Loading"}
+              {data && (
+                <Grid container spacing={1}>
+                  {data.movies.results.map((movie) => (
+                    <Grid key={movie.id} item xs={16} sm={6} md={4} lg={3}>
+                      <MovieCard movie={movie} onCardSelect={selectetMovie} />
+                    </Grid>
+                  ))}
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                  <MovieCard />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                  <MovieCard />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                  <MovieCard />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                  <MovieCard />
-                </Grid>
-              </Grid>
+              )}
             </Box>
+            {!loading && (
+              <Box
+                mt={2}
+                mb={2}
+                spacing={2}
+                sx={{
+                  padding: "10px 0",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Pagination
+                  count={Math.floor(data?.movies?.totalResults / 20)}
+                  page={page}
+                  color="primary"
+                  size="large"
+                  onChange={hendlerPagination}
+                />
+              </Box>
+            )}
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
-          <SelectedMovies>Selected movies</SelectedMovies>
+          <SelectedMovies>
+            {selectedMovies.map((movie) => (
+              <MovieCardSelected
+                key={movie.id}
+                movie={movie}
+                onCardDelete={deleteMovie}
+              />
+            ))}
+          </SelectedMovies>
         </Grid>
       </Grid>
     </Box>
