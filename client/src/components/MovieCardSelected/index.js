@@ -14,10 +14,10 @@ import { CardMenu } from "../../components";
 
 const MovieCardSelected = ({ movie, onCardDelete }) => {
   return (
-    <Card sx={{ display: "flex" }}>
+    <Card sx={{ display: "flex", margin: "10px 0" }}>
       <CardMedia
         component="img"
-        sx={{ width: 100 }}
+        sx={{ width: "100px" }}
         image={movie.image}
         alt={movie.title}
       />

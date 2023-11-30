@@ -13,7 +13,7 @@ const CardMenu = ({ children }) => {
           position: "absolute",
           right: 0,
           top: 0,
-          backgroundColor: "rgba(255 ,255, 255, .7)",
+          backgroundColor: "rgb(195 193 193 / 31%)",
         }}
         aria-label="more"
         id="long-button"

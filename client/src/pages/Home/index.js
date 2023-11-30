@@ -29,6 +29,9 @@ const Home = () => {
     setPage(page);
   };
 
+  const pagesCount =
+    data?.movies?.totalPages <= 500 ? data?.movies?.totalPages : 500;
+
   return (
     <Box sx={{ flexGrow: 1, marginTop: 2 }}>
       <Grid container spacing={2}>
@@ -62,7 +65,7 @@ const Home = () => {
                 }}
               >
                 <Pagination
-                  count={Math.floor(data?.movies?.totalResults / 20)}
+                  count={pagesCount}
                   page={page}
                   color="primary"
                   size="large"
@@ -74,13 +77,19 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <SelectedMovies>
-            {selectedMovies.map((movie) => (
-              <MovieCardSelected
-                key={movie.id}
-                movie={movie}
-                onCardDelete={deleteMovie}
-              />
-            ))}
+            <Box sx={{ maxHeight: "70vh", overflow: "auto" }}>
+              {selectedMovies.length ? (
+                selectedMovies.map((movie) => (
+                  <MovieCardSelected
+                    key={movie.id}
+                    movie={movie}
+                    onCardDelete={deleteMovie}
+                  />
+                ))
+              ) : (
+                <h3>Selected your favorite films</h3>
+              )}
+            </Box>
           </SelectedMovies>
         </Grid>
       </Grid>
