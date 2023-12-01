@@ -1,20 +1,10 @@
 import { useState } from "react";
-import { Box, Grid, Paper, styled, Pagination } from "@mui/material";
-import { MovieCard, MovieCardSelected } from "../../components";
+import { Box, Grid, Paper, Pagination } from "@mui/material";
+import { MovieCard, SelectedMoviesSection } from "../../components";
 
 import { useQuery } from "@apollo/client";
 import { MOVIES_QUERY } from "./queries";
 import { useMovies } from "../../hooks/useMovies";
-
-const SelectedMovies = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-  height: "calc(100vh - 140px)",
-  position: "sticky",
-  top: theme.spacing(2),
-}));
 
 const Home = () => {
   const [page, setPage] = useState(1);
@@ -76,21 +66,10 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
-          <SelectedMovies>
-            <Box sx={{ maxHeight: "70vh", overflow: "auto" }}>
-              {selectedMovies.length ? (
-                selectedMovies.map((movie) => (
-                  <MovieCardSelected
-                    key={movie.id}
-                    movie={movie}
-                    onCardDelete={deleteMovie}
-                  />
-                ))
-              ) : (
-                <h3>Selected your favorite films</h3>
-              )}
-            </Box>
-          </SelectedMovies>
+          <SelectedMoviesSection
+            selectedMovies={selectedMovies}
+            deleteMovie={deleteMovie}
+          />
         </Grid>
       </Grid>
     </Box>
