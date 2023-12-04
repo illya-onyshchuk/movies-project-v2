@@ -1,7 +1,7 @@
 import React from "react";
 
 const Recommend = () => {
-  return <>Recommend</>;
+  return <>I Recommend</>;
 };
 
 export default Recommend;
