@@ -4,6 +4,7 @@ import CardMenu from "./CardMenu";
 import MovieCardSelected from "./MovieCardSelected";
 import SelectedMoviesSection from "./SelectedMoviesSection";
 import SelectedMoviesForm from "./SelectedMoviesForm";
+import ConfirmModal from "./ConfirmModal";
 
 export {
   Navigation,
@@ -12,4 +13,5 @@ export {
   MovieCardSelected,
   SelectedMoviesSection,
   SelectedMoviesForm,
+  ConfirmModal,
 };
