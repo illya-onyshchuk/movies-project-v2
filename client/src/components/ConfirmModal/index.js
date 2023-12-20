@@ -13,6 +13,11 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import { Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+
+import { SocialShare } from "../../components";
 
 const style = {
   position: "absolute",
@@ -21,13 +26,26 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  borderRadius: "15px",
   boxShadow: 24,
   p: 4,
 };
 
 const ConfirmModal = ({ open, url, title, onClose }) => {
-  const [openAlert, setOpenAlert] = useState(false);
+  const [state, setState] = useState({
+    openAlert: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, openAlert } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ ...newState, openAlert: true });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, openAlert: false });
+  };
 
   return (
     <Modal
@@ -56,12 +74,23 @@ const ConfirmModal = ({ open, url, title, onClose }) => {
             inputProps={{ "aria-label": "list URL" }}
             value={url}
           />
-          <IconButton sx={{ p: "10px" }} aria-label="preview">
+          {/* <Link component={RouterLink} to="recommend">
+            <IconButton sx={{ p: "10px" }} aria-label="preview">
+              <RemoveRedEyeOutlinedIcon />
+            </IconButton>
+          </Link> */}
+          <IconButton
+            href={url}
+            target="_blank"
+            sx={{ p: "10px" }}
+            aria-label="preview"
+          >
             <RemoveRedEyeOutlinedIcon />
           </IconButton>
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <CopyToClipboard text={url} onCopy={() => setOpenAlert(true)}>
+          <CopyToClipboard text={url}>
             <IconButton
+              onClick={handleClick({ vertical: "top", horizontal: "center" })}
               color="primary"
               sx={{ p: "10px" }}
               aria-label="copy to clipboard"
@@ -70,24 +99,42 @@ const ConfirmModal = ({ open, url, title, onClose }) => {
             </IconButton>
           </CopyToClipboard>
         </Paper>
+
+        <Typography
+          id="modal-modal-title"
+          variant="h6"
+          component="h3"
+          sx={{ pt: "12px" }}
+        >
+          Share with frends
+        </Typography>
+
+        <SocialShare url={url} title={title} />
+
         {openAlert ? (
-          <Alert
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpenAlert(false);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
+          <Snackbar
+            autoHideDuration={500}
+            anchorOrigin={{ vertical, horizontal }}
+            open={openAlert}
+            onClose={handleClose}
+            key={vertical + horizontal}
           >
-            Copied!
-          </Alert>
+            <Alert
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={handleClose}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mt: "-20px" }}
+            >
+              Copied!
+            </Alert>
+          </Snackbar>
         ) : null}
       </Box>
     </Modal>
