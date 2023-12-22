@@ -15,6 +15,10 @@ class Movie {
     this.voteCount = movie.vote_count;
     this.video = movie.video;
     this.voteAverage = movie.vote_average;
+    this.runtime = movie.runtime;
+    this.status = movie.status;
+    this.genres = movie.genres;
+    this.originalTitle = movie.original_title;
   }
 
   releaseDate(params) {

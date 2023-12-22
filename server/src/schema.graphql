@@ -1,12 +1,13 @@
 type Query {
   movies(page: Int): Movies
+  moviesByIds(ids: [Int]): [Movie]
 }
 
 type Movies {
   page: Int!
   totalResults: Int!
   totalPages: Int!
-  results: [Movie!]
+  results: [Movie!]!
 }
 
 type Movie {
@@ -24,6 +25,8 @@ type Movie {
   voteCount: Int
   video: Boolean
   voteAverage: Float
+  runtime: Int
+  status: String
 }
 
 type Genre {

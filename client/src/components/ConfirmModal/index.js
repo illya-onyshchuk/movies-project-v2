@@ -1,21 +1,23 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import PropTypes from "prop-types";
 
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import CloseIcon from "@mui/icons-material/Close";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 import { Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import {
+  Box,
+  Typography,
+  Modal,
+  Paper,
+  InputBase,
+  Divider,
+  IconButton,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 
 import { SocialShare } from "../../components";
 
