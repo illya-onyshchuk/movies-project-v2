@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -76,11 +74,6 @@ const ConfirmModal = ({ open, url, title, onClose }) => {
             inputProps={{ "aria-label": "list URL" }}
             value={url}
           />
-          {/* <Link component={RouterLink} to="recommend">
-            <IconButton sx={{ p: "10px" }} aria-label="preview">
-              <RemoveRedEyeOutlinedIcon />
-            </IconButton>
-          </Link> */}
           <IconButton
             href={url}
             target="_blank"
