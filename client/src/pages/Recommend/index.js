@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Typography, Grid } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { MOVIES_BY_IDS_QUERY } from "./queries";
-import { MovieCard } from "../../components";
+import { MovieCard, Loading } from "../../components";
 
 const Recommend = () => {
   const [searchParams] = useSearchParams();
@@ -23,16 +23,13 @@ const Recommend = () => {
     });
   }, [searchParams]);
 
-  if (loading) {
-    <div>Loading...</div>;
-  }
-
   if (error) {
     <div>Error. Try again!</div>;
   }
 
   return (
     <>
+      {loading && <Loading />}
       <Typography variant="h2" component="h2" gutterBottom>
         {params.title}
       </Typography>

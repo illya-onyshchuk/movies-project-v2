@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Grid, Paper, Pagination } from "@mui/material";
 import { MovieCard, SelectedMoviesSection } from "../../components";
+import { Loading } from "../../components";
 
 import { useQuery } from "@apollo/client";
 import { MOVIES_QUERY } from "./queries";
@@ -31,7 +32,7 @@ const Home = () => {
         <Grid item xs={12} md={8}>
           <Paper>
             <Box sx={{ flexGrow: 1, padding: 1 }}>
-              {loading && "Loading"}
+              {loading && <Loading />}
               {data && (
                 <Grid container spacing={1}>
                   {data.movies.results.map((movie) => (

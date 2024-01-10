@@ -37,6 +37,7 @@ const ConfirmModal = ({ open, url, title, onClose }) => {
     vertical: "top",
     horizontal: "center",
   });
+
   const { vertical, horizontal, openAlert } = state;
 
   const handleClick = (newState) => () => {
