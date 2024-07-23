@@ -3,6 +3,11 @@
   "version": "0.3.0",
   "description": "Movie recommender application",
   "main": "./server/src/index.js",
+  "scripts": {
+    "start": "node ./server/src/index.js",
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install && ../server && npm install"
+  },
   "author": "Illia",
   "license": "MIT",
   "engines": {
