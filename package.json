@@ -1,0 +1,11 @@
+{
+  "name": "movies-recommender",
+  "version": "0.3.0",
+  "description": "Movie recommender application",
+  "main": "./server/src/index.js",
+  "author": "Illia",
+  "license": "MIT",
+  "engines": {
+    "node": "20.x"
+  }
+}
