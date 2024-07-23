@@ -50,7 +50,7 @@ async function startApolloServer(typeDefs, resolvers) {
     httpServer.listen({ port: process.env.PORT || 80 }, resolve)
   );
   console.log(
-    `🚀 Server ready at http://localhost:4000${process.env.PORT || 80}${
+    `🚀 Server ready at http://localhost:${process.env.PORT || 80}${
       server.graphqlPath
     }`
   );
